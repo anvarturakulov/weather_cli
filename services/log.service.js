@@ -1,5 +1,6 @@
 import chalk from 'chalk'
 import dedent from 'dedent-js'
+import logSymbols from 'log-symbols';
 
 const printError = (error) => {
     console.log(chalk.bgRed(' ERROR ')+ ' '+error)
@@ -20,4 +21,16 @@ const printHelp = () => {
     )
 }
 
-export {printError, printSuccess, printHelp}
+const printWeather = (data) => {
+    if (data) {
+        console.log(
+            dedent`${chalk.bgGreen(' Погода ')}
+                    ${logSymbols.success} город: ${data.name}
+                    ${logSymbols.info} как: ${data.weather[0].description}
+                    ${logSymbols.info} скорость ветра: ${data.wind?.speed}
+            `
+        ) 
+    }
+}
+
+export { printError, printSuccess, printHelp, printWeather }
